@@ -3,24 +3,12 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
+  background-color: var(--primary-background-color);
 }
-.parent
+:root
 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 800px;
-  height: 800px;
-  margin: 0 auto;
-  overflow: auto;
-}
-.parent::-webkit-scrollbar
-{
-  display:none;
-}
-.poster
-{
-  max-width:100%;
-  height:auto;
+  --secondary-text-color:#D1D5DB;
+  --primary-background-color:#06202A;
 }
 
 

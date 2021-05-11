@@ -1,0 +1,39 @@
+.navbar__main
+{
+    margin-top: 1rem;
+    display: flex;
+    color: var(--secondary-text-color);
+    padding:1rem;
+    justify-content: space-between;
+    overflow-x:auto;
+    position:relative;
+}
+
+.navbar__main::-webkit-scrollbar
+{
+    display: none;
+}
+
+.navbar__main > h2
+{
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s;
+}
+.navbar__main > h2:hover
+{
+    cursor:pointer;
+    transform: scale(1.1);
+    color:white;
+}
+
+
+@media screen and (max-width:900px)
+{
+    .navbar__main > h2:not(:first-child)
+    {
+        margin-left: 40px;
+        white-space: nowrap;
+    }
+   
+}
+ 

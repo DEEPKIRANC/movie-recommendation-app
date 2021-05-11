@@ -1,9 +1,12 @@
 import React,{useState,useEffect} from "react";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import HomePage from "./components/HomePage";
 
 import './App.css';
 
 function App() {
-
+{/*
 const [movies,setMovies]=useState([]);
 const [loading,setLoading]=useState(true);
 const [page,setPage]=useState(1);
@@ -28,10 +31,13 @@ useEffect(()=>{
   }
   func();
 },[page])
- 
+ */}
   return (
     <div className="App">
-      <div className="parent" onScroll={(e)=>handleScroll(e)}>
+      <Header />
+      <Navbar />
+      <HomePage />
+      {/*<div className="parent" onScroll={(e)=>handleScroll(e)}>
       {movies?.map((movie,index)=>
       (
         <div key={index}>
@@ -41,7 +47,7 @@ useEffect(()=>{
       )
       }
       {loading && <div>Loading ....</div>}
-      </div>    
+    </div>*/}    
     </div>
   );
 }
