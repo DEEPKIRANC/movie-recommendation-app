@@ -1,6 +1,6 @@
 const API_KEY=process.env.REACT_APP_SECRET_KEY;
 
-export default{
+const requests={
     
     fetchTrending:`/trending/movie/week?api_key=${API_KEY}&language=en-US`,
     fetchTopRated:`/movie/top_rated?api_key=${API_KEY}&language=en-US`,
@@ -11,3 +11,5 @@ export default{
     fetchMysteryMovies:`/discover/movie?api_key=${API_KEY}&with_genres=9648`,
     fetchSciFiMovies:`/discover/movie?api_key=${API_KEY}&with_genres=878`
 }
+
+export default requests

@@ -1,0 +1,30 @@
+.movie__card
+{
+    width:500px;
+    height:400px;
+    padding:20px;
+    transition: transform 100ms;
+}
+.movie__card:hover
+{
+    transform:scale(1.09);
+}
+.movie__bg
+{
+    object-fit: contain;
+    width:450px;
+    height:300px;
+}
+@media screen and (max-width:500px)
+{
+    .movie__card
+    {
+        width:400px;
+        height:300px;
+    }
+    .movie__bg
+    {
+        width:350px;
+        height:200px;
+    }
+}

@@ -10,6 +10,10 @@
   --secondary-text-color:#D1D5DB;
   --primary-background-color:#06202A;
 }
+body
+{
+  overflow-x: hidden;
+}
 
 
 
