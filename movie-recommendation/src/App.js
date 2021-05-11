@@ -4,28 +4,44 @@ import './App.css';
 
 function App() {
 
-const [movies,setMovies]=useState([]);  
+const [movies,setMovies]=useState([]);
+const [loading,setLoading]=useState(true);
+const [page,setPage]=useState(1);
+
+const handleScroll=(e)=>{
+
+  const {scrollTop, clientHeight, scrollHeight}=e.currentTarget;
+  console.log("scrolltop : ",scrollTop, "clientheight: ",clientHeight," scrollheight: ",scrollHeight);
+  if(scrollHeight - scrollTop === clientHeight)
+  {
+    setPage(prev=>prev+1);
+  }
+}
 useEffect(()=>{
   const func=async()=>{
-    const result=await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_SECRET_KEY}`)
+    setLoading(true);
+    const result=await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&page=${page}&api_key=${process.env.REACT_APP_SECRET_KEY}`)
     const data=await result.json();
-    setMovies(data.results);
     console.log(data.results);
+    setMovies((prev)=>[...prev,...data.results]);
+    setLoading(false);
   }
   func();
-},[])
+},[page])
  
   return (
     <div className="App">
-      {movies.length>0 ? movies.map((movie,index)=>
+      <div className="parent" onScroll={(e)=>handleScroll(e)}>
+      {movies?.map((movie,index)=>
       (
         <div key={index}>
-        <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="No poster"/>  
-        <h1>{movie.original_title} : {movie.vote_average}</h1>
+          <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} className="poster" alt="No poster"/> 
         </div>
       )
       )
-:<div>Loading ....</div>}
+      }
+      {loading && <div>Loading ....</div>}
+      </div>    
     </div>
   );
 }
