@@ -23,7 +23,7 @@
 {
     cursor:pointer;
     transform: scale(1.1);
-    color:white;
+    color:var(--primary-text-color);
 }
 
 

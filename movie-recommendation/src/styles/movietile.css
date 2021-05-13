@@ -4,6 +4,8 @@
     height:400px;
     padding:20px;
     transition: transform 100ms;
+    color:var(--secondary-text-color);
+    font-family: 'Nunito','sans-serif';
 }
 .movie__card:hover
 {
@@ -15,6 +17,14 @@
     width:450px;
     height:300px;
 }
+.rating
+{
+    font-size: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    color: var(--primary-text-color);
+}
+
 @media screen and (max-width:500px)
 {
     .movie__card
@@ -26,5 +36,9 @@
     {
         width:350px;
         height:200px;
+    }
+    .movie__info
+    {
+        text-align: center;
     }
 }

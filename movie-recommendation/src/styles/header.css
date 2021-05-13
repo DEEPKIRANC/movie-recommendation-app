@@ -1,7 +1,7 @@
 span
 {
     font-family: 'Bebas Neue', cursive;
-    color:white;
+    color:var(--primary-text-color);
     letter-spacing:0.2rem;
     font-size: 2rem;
     
@@ -29,6 +29,12 @@ span
 ::placeholder
 {
 color:var(--secondary-text-color);
+}
+
+.header__icons .MuiSvgIcon-root
+{
+    color:var(--primary-text-color);
+    cursor: pointer;
 }
 
 @media screen and (max-width:700px)
