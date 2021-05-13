@@ -6,6 +6,7 @@
     transition: transform 100ms;
     color:var(--secondary-text-color);
     font-family: 'Nunito','sans-serif';
+    cursor:pointer;
 }
 .movie__card:hover
 {
