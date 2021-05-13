@@ -9,12 +9,17 @@ const MovieTile=forwardRef((props,ref)=> {
     const [,,,,movieId,setMovieId]=useContext(DataContext);
     
    // console.log(props.movie.backdrop_path);
-    
+    const handleMovie=()=>{
+        console.log(props.movie.id);
+        setMovieId(props.movie.id);
+       
+    }
+
     return (
-    <Link to="/moviedetail">
-        <div ref={ref} className="movie__card" >
+    <Link style={{textDecoration:"none"}} to="/moviedetail">
+        <div ref={ref} onClick={handleMovie} className="movie__card" >
            
-                <img className="movie__bg" src={`${IMAGE_PATH}${props.movie.backdrop_path || props.movie.poster_path}`} onClick={()=>setMovieId(props.movie.id)} />
+                <img className="movie__bg" src={`${IMAGE_PATH}${props.movie.backdrop_path || props.movie.poster_path}`}  />
            
             <div className="movie__info">
                 <h3>{props.movie.original_title || props.movie.title}</h3>
