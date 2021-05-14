@@ -122,4 +122,8 @@
     .backdrop > img{
         border-radius: 7px;
     }
+    .cast__details
+    {
+        row-gap: 40px;
+    }
 }
