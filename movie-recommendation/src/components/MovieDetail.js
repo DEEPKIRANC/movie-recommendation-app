@@ -10,6 +10,7 @@ const IMAGE_PATH="https://image.tmdb.org/t/p/original/";
 function MovieDetail() {
     const [,,,,movieId,setMovieId,genreList,]=useContext(DataContext);
     const [movie,setMovie]=useState("");
+    const [cast,setCast]=useState([]);
     useEffect(()=>{
       const getMovieDetails=async()=>{
           const res=await fetch(`${FETCH_URL}${movieId}?api_key=${API_KEY}`);
@@ -21,12 +22,13 @@ function MovieDetail() {
       const getCastDetails=async()=>{
           const res_cast=await fetch(`${FETCH_URL}${movieId}/credits?api_key=${API_KEY}`);
           const res_data=await res_cast.json();
-          console.log(res_data);
+          console.log(res_data.cast);
+          setCast(res_data.cast);
       }  
       getMovieDetails();
       getCastDetails();
     },[movieId])
-    return (
+    return (<div>
         <div className="header__section">
             <div className="backdrop">
               <img src={`${IMAGE_PATH}${movie?.poster_path}`} alt="No Poster"/>          
@@ -47,13 +49,22 @@ function MovieDetail() {
                     <h4>Synopsis</h4>
                     <p>{movie?.overview}</p>
                 </div>
-                <div className="bottom__section">
-                    </div>     
-            </div>    
-        <div>
-
-            </div>    
+                    
+            </div>
+                
+           
         </div>
+        <h3 style={{color:"var(--secondary-text-color)",textAlign:"center",marginTop:"1rem"}}>CAST</h3>
+        <div className="cast__details">
+            {cast?.filter(cas=>cas.order<9).map(ca=>(
+                <div className="cast__card">
+                    <img src={`${IMAGE_PATH}${ca.profile_path}`} alt="No Poster"/>
+                    <h4>{ca?.original_name}</h4>
+                    <h5>{ca?.character}</h5>
+                </div>    
+            ))}
+        </div>
+     </div>    
     )
 }
 
