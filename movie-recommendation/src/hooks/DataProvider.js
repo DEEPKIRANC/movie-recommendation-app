@@ -8,7 +8,7 @@ function DataProvider(props) {
     const [selectedGenre,setSelectedGenre]=useState(requests.fetchTrending);
     const [theme,setTheme]=useState(false);
     const [movieId,setMovieId]=useState(0);
-    
+    const [myMovies,setMyMovies]=useState([]);
 
 
     return (
@@ -17,7 +17,9 @@ function DataProvider(props) {
     theme,
     setTheme,
     movieId,
-    setMovieId]}>
+    setMovieId,
+    myMovies,
+    setMyMovies]}>
         {props.children}
     
     </DataContext.Provider>

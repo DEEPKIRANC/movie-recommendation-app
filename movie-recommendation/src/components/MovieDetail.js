@@ -4,16 +4,26 @@ import { Link } from "react-router-dom";
 import "../styles/moviedetail.css"; 
 import StarRateIcon from '@material-ui/icons/StarRate';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const API_KEY=process.env.REACT_APP_SECRET_KEY;
 const FETCH_URL='https://api.themoviedb.org/3/movie/';
 
 const IMAGE_PATH="https://image.tmdb.org/t/p/original/";
 function MovieDetail() {
-    const [,,,,movieId,setMovieId,genreList,]=useContext(DataContext);
+    const [,,,,movieId,setMovieId,myMovies,setMyMovies]=useContext(DataContext);
     const [movie,setMovie]=useState("");
     const [cast,setCast]=useState([]);
     const [similarMovies,setSimilarMovies]=useState([]);
+    useEffect(()=>{
+        const mymovie=JSON.parse(localStorage.getItem("myMovies"));
+        console.log(mymovie);
+        if(mymovie)
+        {
+
+          setMyMovies(mymovie);
+        }
+    },[])
     useEffect(()=>{
       const getMovieDetails=async()=>{
           const res=await fetch(`${FETCH_URL}${movieId}?api_key=${API_KEY}`);
@@ -52,6 +62,23 @@ function MovieDetail() {
         });
     }
 
+
+    const addToPlayList=()=>{
+        const movieObj={
+            id:movieId,
+            title:movie.original_title,
+            poster:movie.poster_path,
+            watch_status:"Queued"
+        }
+        console.log(movieObj);
+        const fetchMovies=JSON.parse(localStorage.getItem("myMovies") || "[]");
+        fetchMovies.push(movieObj);
+        localStorage.setItem("myMovies",JSON.stringify(fetchMovies));
+        setMyMovies(prev=>[...prev,movieObj]);
+        
+        console.log("Movie Added!");
+    }
+
     return (<div style={{userSelect:"none"}}>
         <div className="header__section">
             <div className="backdrop">
@@ -76,7 +103,22 @@ function MovieDetail() {
                 </div>
 
                 <div className="bottom__section" style={{marginTop:"2rem"}}>
-                    <span>
+                    {(myMovies?.some(m=>m.id===movieId)) ? 
+                    <span style={{display:"block"}}>
+                        <span style={{display:"inline-block",verticalAlign:"middle"}}><CheckBoxIcon/></span>
+                        <span style={{display:"inline-block",verticalAlign:"middle",color:"var(--secondary-text-color)",fontSize:"1rem"}}>My List</span>
+                    </span>    
+                     : 
+                     <button style={{display:"block",
+                     padding:"0.5rem",
+                     color:"var(--secondary-text-color)"
+                     ,fontFamily:"Nunito",
+                     borderColor:"var(--secondary-text-color)",
+                     cursor:"pointer"}} onClick={addToPlayList} >
+                         Add to Playlist
+                     </button>
+                     }
+                    <span style={{marginTop:"1rem"}}>
                         <span style={{display:"inline-block",verticalAlign:"middle"}}><ArrowBackIcon/></span>
                         <span style={{display:"inline-block",verticalAlign:"middle",fontSize:"1rem"}}>
                             <Link style={{color:"var(--secondary-text-color)",textDecoration:"none"}} to="/">

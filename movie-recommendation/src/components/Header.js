@@ -1,9 +1,8 @@
-import React,{useContext, useState,useRef} from 'react'
+import React,{useContext, useState,useRef,useEffect} from 'react'
 import "../styles/header.css"
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Link } from "react-router-dom";
 
@@ -18,6 +17,8 @@ function Header() {
     const [searchResults,setSearchResults]=useState([]);
     const inputRef=useRef();
     const resultRef=useRef();
+
+    
     const changeTheme=()=>{
         if(!theme)
         {
@@ -98,7 +99,7 @@ function Header() {
                 {theme===false?<WbSunnyIcon onClick={changeTheme} />
                 :
                 <Brightness4Icon onClick={changeTheme} />}
-                <AccountCircleIcon style={{marginLeft:"15px"}}/>
+                <Link to="/myplaylist"><PlaylistPlayIcon style={{marginLeft:"15px"}}/></Link>
            </div>
         </div>
     )

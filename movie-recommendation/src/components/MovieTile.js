@@ -13,6 +13,7 @@ const MovieTile=forwardRef((props,ref)=> {
         console.log(props.movie.id);
         setMovieId(props.movie.id);
        
+       
     }
 
     return (

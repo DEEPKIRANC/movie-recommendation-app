@@ -7,6 +7,7 @@ import ErrorPage from "./components/ErrorPage";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 
 import './App.css';
+import MyPlayList from "./components/MyPlayList";
 
 function App() {
 
@@ -18,7 +19,10 @@ function App() {
             <Route path="/moviedetail" exact>
                 <MovieDetail /> 
             </Route>
-        
+
+            <Route path="/myplaylist" exact>
+                <MyPlayList /> 
+            </Route>
         
             <Route path="/" exact>
                 <Navbar />
