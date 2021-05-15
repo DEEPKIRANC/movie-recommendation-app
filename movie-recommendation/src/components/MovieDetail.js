@@ -17,7 +17,7 @@ function MovieDetail() {
     const [similarMovies,setSimilarMovies]=useState([]);
     useEffect(()=>{
         const mymovie=JSON.parse(localStorage.getItem("myMovies"));
-        console.log(mymovie);
+        //console.log(mymovie);
         if(mymovie)
         {
 
