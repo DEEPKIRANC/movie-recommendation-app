@@ -1,9 +1,12 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {DataContext} from "../hooks/DataProvider";
+import { Link } from "react-router-dom";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "../styles/playlist.css";
+
 const IMAGE_PATH="https://image.tmdb.org/t/p/original/";
 function MyPlayList() {
     const [,
@@ -82,7 +85,18 @@ function MyPlayList() {
                 </div>
             ))
             }
-            {myMovies.length===0 && <h2>There are no movies in your playlist ! Start adding..</h2>}
+            {myMovies.length===0 && <>
+            <h3 style={{textAlign:"center",fontFamily:"Nunito",color:"var(--secondary-text-color)"}} >There are no movies in your playlist ! Start adding..</h3>
+            <span style={{marginTop:"1rem"}}>
+                        <span style={{display:"inline-block",verticalAlign:"middle"}}><ArrowBackIcon/></span>
+                        <span style={{display:"inline-block",verticalAlign:"middle",fontSize:"1rem"}}>
+                            <Link style={{color:"var(--secondary-text-color)",textDecoration:"none"}} to="/">
+                                    BACK TO HOME
+                            </Link>
+                        </span>
+                    </span>
+            </>
+            }
             </div>
         </div>
     )

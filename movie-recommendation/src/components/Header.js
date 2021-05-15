@@ -4,6 +4,8 @@ import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import ClearIcon from '@material-ui/icons/Clear';
+import HomeIcon from '@material-ui/icons/Home';
+
 import { Link } from "react-router-dom";
 
 import {DataContext} from "../hooks/DataProvider";
@@ -100,6 +102,10 @@ function Header() {
                 :
                 <Brightness4Icon onClick={changeTheme} />}
                 <Link to="/myplaylist"><PlaylistPlayIcon style={{marginLeft:"15px"}}/></Link>
+                <Link to="/">
+                    <HomeIcon style={{marginLeft:"15px"}}/>
+                </Link>
+                
            </div>
         </div>
     )
