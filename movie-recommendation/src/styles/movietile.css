@@ -7,6 +7,7 @@
     color:var(--secondary-text-color);
     font-family: 'Nunito','sans-serif';
     cursor:pointer;
+    user-select: none;
 }
 .movie__card:hover
 {

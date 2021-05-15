@@ -6,7 +6,8 @@
     padding:1rem;
     justify-content: space-between;
     overflow-x:auto;
-    position:relative;
+   
+    user-select: none;
 }
 
 .navbar__main::-webkit-scrollbar

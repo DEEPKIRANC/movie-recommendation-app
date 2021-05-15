@@ -1,7 +1,9 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {DataContext} from "../hooks/DataProvider";
+import { Link } from "react-router-dom";
 import "../styles/moviedetail.css"; 
 import StarRateIcon from '@material-ui/icons/StarRate';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const API_KEY=process.env.REACT_APP_SECRET_KEY;
 const FETCH_URL='https://api.themoviedb.org/3/movie/';
@@ -11,24 +13,46 @@ function MovieDetail() {
     const [,,,,movieId,setMovieId,genreList,]=useContext(DataContext);
     const [movie,setMovie]=useState("");
     const [cast,setCast]=useState([]);
+    const [similarMovies,setSimilarMovies]=useState([]);
     useEffect(()=>{
       const getMovieDetails=async()=>{
           const res=await fetch(`${FETCH_URL}${movieId}?api_key=${API_KEY}`);
           const data=await res.json();
           
-          console.log(data);
+         // console.log(data);
           setMovie(data);  
         }
       const getCastDetails=async()=>{
           const res_cast=await fetch(`${FETCH_URL}${movieId}/credits?api_key=${API_KEY}`);
           const res_data=await res_cast.json();
-          console.log(res_data.cast);
+         // console.log(res_data.cast);
           setCast(res_data.cast);
       }  
+
+      const getSimilarMovieDetails=async()=>{
+        const res_similar=await fetch(`${FETCH_URL}${movieId}/recommendations?api_key=${API_KEY}`);
+        const data=await res_similar.json();
+        
+        console.log(data);
+        setSimilarMovies(data.results);  
+      }
+
       getMovieDetails();
       getCastDetails();
+      getSimilarMovieDetails();
     },[movieId])
-    return (<div>
+
+
+
+    const setMovieDetails=(id)=>{
+        setMovieId(id);
+        window.scroll({
+            top:0,
+            behavior:'smooth'
+        });
+    }
+
+    return (<div style={{userSelect:"none"}}>
         <div className="header__section">
             <div className="backdrop">
               <img src={`${IMAGE_PATH}${movie?.poster_path}`} alt="No Poster"/>          
@@ -48,8 +72,19 @@ function MovieDetail() {
                     <span>{`${movie?.release_date} | ${movie?.runtime} mins | `}</span>{movie?.genres?.map(genre=>(<span style={{marginLeft:"10px"}} key={genre.id}>{genre.name}</span>))}
                     <h4>Synopsis</h4>
                     <p>{movie?.overview}</p>
-                </div>
                     
+                </div>
+
+                <div className="bottom__section" style={{marginTop:"2rem"}}>
+                    <span>
+                        <span style={{display:"inline-block",verticalAlign:"middle"}}><ArrowBackIcon/></span>
+                        <span style={{display:"inline-block",verticalAlign:"middle",fontSize:"1rem"}}>
+                            <Link style={{color:"var(--secondary-text-color)",textDecoration:"none"}} to="/">
+                                    BACK TO HOME
+                            </Link>
+                        </span>
+                    </span>
+                </div>        
             </div>
                 
            
@@ -64,6 +99,21 @@ function MovieDetail() {
                 </div>    
             ))}
         </div>
+        <h3 style={{color:"var(--secondary-text-color)",textAlign:"center",marginTop:"2rem"}}>SIMILAR MOVIES</h3>
+        <div className="similar__movies">
+            {similarMovies.length>0?
+                similarMovies.map(movie=>(
+                    <div key={movie.id} onClick={()=>setMovieDetails(movie.id)} className="similar__movieCard">
+                        <img src={`${IMAGE_PATH}${movie.backdrop_path ||movie.poster_path}`} alt="No Poster" />
+                        <h4>{movie.original_title || movie.title}</h4>
+                    </div>
+                ))
+               
+                : <div>Loading........</div>
+
+            }
+                    
+        </div>    
      </div>    
     )
 }
