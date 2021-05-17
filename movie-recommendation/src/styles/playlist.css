@@ -23,7 +23,7 @@
     border-radius: 20px;
     padding:0.5rem;
     max-width:250px;
-    max-height:400px;
+    margin-bottom: 10px;
     border:1px solid var(--secondary-text-color);
 }
 .movies__card > img
