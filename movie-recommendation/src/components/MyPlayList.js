@@ -6,6 +6,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "../styles/playlist.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const IMAGE_PATH="https://image.tmdb.org/t/p/original/";
 function MyPlayList() {
@@ -35,6 +37,7 @@ function MyPlayList() {
           const filteredMovieList=myMovies.filter(m=>m.id!==id);
           setMyMovies(filteredMovieList);
           localStorage.setItem("myMovies",JSON.stringify(filteredMovieList));
+          toast.info("Movie deleted from playlist!",{position:"top-right"});
           } 
         }
 
@@ -53,8 +56,10 @@ function MyPlayList() {
         })
         setMyMovies(updatedMovieList);
         localStorage.setItem("myMovies",JSON.stringify(updatedMovieList));
+        toast.success("Watch Status Changed!",{position:"top-right"});
     }    
     return (
+        <>
         <div className="parent__div">
             <h3>My Playlist</h3>
             <div className="watchstatus" >
@@ -99,6 +104,8 @@ function MyPlayList() {
             }
             </div>
         </div>
+        <ToastContainer/>
+        </>
     )
 }
 

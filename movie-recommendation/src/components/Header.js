@@ -1,4 +1,4 @@
-import React,{useContext, useState,useRef,useEffect} from 'react'
+import React,{useContext, useState,useRef} from 'react'
 import "../styles/header.css"
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
@@ -9,6 +9,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import { Link } from "react-router-dom";
 
 import {DataContext} from "../hooks/DataProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_KEY=process.env.REACT_APP_SECRET_KEY;
 const FETCH_URL="https://api.themoviedb.org/3/";
@@ -57,7 +59,7 @@ function Header() {
         }   
         else
         {
-            alert("Please enter atleast 1 character");
+            toast.error("Please Enter atleast 1 character!");
         } 
        
          
@@ -77,6 +79,7 @@ function Header() {
             setSearchText("");
     }
     return (
+        <>
         <div className="main__div">
            <span> MovieVerse </span>
            <form onSubmit={handleSubmit}>
@@ -108,6 +111,8 @@ function Header() {
                 
            </div>
         </div>
+        <ToastContainer/>
+        </>
     )
 }
 

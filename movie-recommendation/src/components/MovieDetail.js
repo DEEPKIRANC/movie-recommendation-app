@@ -5,6 +5,8 @@ import "../styles/moviedetail.css";
 import StarRateIcon from '@material-ui/icons/StarRate';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_KEY=process.env.REACT_APP_SECRET_KEY;
 const FETCH_URL='https://api.themoviedb.org/3/movie/';
@@ -76,10 +78,15 @@ function MovieDetail() {
         localStorage.setItem("myMovies",JSON.stringify(fetchMovies));
         setMyMovies(prev=>[...prev,movieObj]);
         
-        console.log("Movie Added!");
+       toast.success("Movie Added to playlist!",{position:"top-right"});
     }
 
-    return (<div style={{userSelect:"none"}}>
+    if(!movie)
+    {
+        return <div>Loading....</div>
+    }
+    return (<>
+    <div style={{userSelect:"none"}}>
         <div className="header__section">
             <div className="backdrop">
               <img src={`${IMAGE_PATH}${movie?.poster_path}`} alt="No Poster"/>          
@@ -156,7 +163,9 @@ function MovieDetail() {
             }
                     
         </div>    
-     </div>    
+     </div>
+     <ToastContainer/>
+     </>    
     )
 }
 
